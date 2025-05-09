@@ -6,14 +6,12 @@ How to connect the dataBase with your project (DB first):
 2- Go to visual studio and open Package Manager Console from : Tools -> NuGet Package Manager -> Package Manager Console.
  - Then put this command one by one in the terminal : 
 
-Install-Package Microsoft.EntityFrameworkCore -Version 8.0.3
 Install-Package Microsoft.EntityFrameworkCore.Tools -Version 8.0.3
 Install-Package Microsoft.EntityFrameworkCore.Design -Version 8.0.3
 Install-Package Microsoft.EntityFrameworkCore.Relational -Version 8.0.3
 Install-Package Pomelo.EntityFrameworkCore.MySql -Version 8.0.1
 
 
-(Important Note: I Did Reinstall this Package "Install-Package Swashbuckle.AspNetCore" just because I Forget That I am working in angular project)
 
 
 
@@ -29,19 +27,15 @@ Scaffold-DbContext "Server=ServerName;Database=DataBaseName;Uid=root;Pwd=Account
 
 4- Put this code inside program.cs
 
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"), 
-    ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection")
-			    )
-                     )
-                                            );
+builder.Services.AddDbContext<MyDbContext>(options =>
+    options.UseMySql("server=localhost;port=3306;database=Nabataty;user=root;password=1234;",
+    new MySqlServerVersion(new Version(8, 0, 1))));
 
 5- Put this code inside appsetting.json
 
-ConnectionStrings": {
-    "DefaultConnection": "server=localhost;port=3306;database=mydb;user=root;password=yourpassword;"
-}
-
+    "ConnectionStrings\": {": null,
+    "DefaultConnection": "server=localhost;port=3306;database=Nabtaty;user=root;password=1234;"
+,
 
 
 
